@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 环境与密钥
+.env
+
+# 运行时数据（知识库与上传文件，不入库）
+data/vectorstore/*
+data/uploads/*
+!data/vectorstore/.gitkeep
+!data/uploads/.gitkeep
+
+# 本地模型缓存（从 ModelScope/HF 自动下载）
+models/
+
+# 编辑器 / 系统
+.DS_Store
+.idea/
+.vscode/

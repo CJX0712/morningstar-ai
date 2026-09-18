@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>晨星 AI · MorningStar</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- 侧边栏 -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">✦</div>
+        <div>
+          <div class="brand-name">晨星 AI</div>
+          <div class="brand-sub">MorningStar · 世界级 AI 智能体</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <label class="field-label">模型提供方</label>
+        <select id="provider" class="control"></select>
+      </div>
+
+      <div class="panel">
+        <label class="field-label">模型名称</label>
+        <input id="model" class="control" type="text" placeholder="留空用默认" />
+      </div>
+
+      <div class="panel row">
+        <label class="switch">
+          <input id="rag" type="checkbox" />
+          <span class="slider"></span>
+        </label>
+        <span class="field-label">启用知识库 RAG</span>
+      </div>
+
+      <div class="panel">
+        <label class="field-label">上传文档到知识库</label>
+        <label class="upload-btn">
+          选择文件（txt / md / pdf）
+          <input id="file" type="file" accept=".txt,.md,.pdf" hidden />
+        </label>
+        <div id="docs" class="docs"></div>
+      </div>
+
+      <div class="panel">
+        <button id="clearRag" class="ghost-btn">清空知识库</button>
+        <button id="newChat" class="ghost-btn">新建对话</button>
+      </div>
+
+      <div class="footer">由 晨星 打造 · 复用全网顶尖创新</div>
+    </aside>
+
+    <!-- 主聊天区 -->
+    <main class="chat">
+      <div id="messages" class="messages">
+        <div class="welcome">
+          <h1>✦ 晨星 AI</h1>
+          <p>我是世界级 AI 智能体，支持多模型切换、联网搜索、计算、代码执行与知识库问答。</p>
+          <p class="hint">提示：先在左侧选择已配置 Key 的模型提供方，即可开始对话。</p>
+        </div>
+      </div>
+
+      <div class="composer">
+        <textarea id="input" placeholder="输入消息，Enter 发送，Shift+Enter 换行…" rows="1"></textarea>
+        <button id="send" class="send-btn">发送</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
