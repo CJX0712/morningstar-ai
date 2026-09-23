@@ -2,6 +2,13 @@
 
 # ✦ 晨星 AI · MorningStar
 
+<p align="center">
+  <a href="https://github.com/CJX0712/morningstar-ai/actions/workflows/ci.yml"><img src="https://github.com/CJX0712/morningstar-ai/actions/workflows/ci.yml/badge.svg" alt="ci"></a>
+  <a href="https://github.com/CJX0712/morningstar-ai/releases"><img src="https://img.shields.io/github/v/release/CJX0712/morningstar-ai?sort=semver" alt="release"></a>
+  <a href="https://github.com/CJX0712/morningstar-ai/blob/main/LICENSE"><img src="https://img.shields.io/github/license/CJX0712/morningstar-ai" alt="license"></a>
+  <img src="https://img.shields.io/badge/author-%E6%99%A8%E6%98%9F-1f6feb" alt="author">
+</p>
+
 **世界级 AI 智能体应用 · 复用全网顶尖创新成果**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
