@@ -43,7 +43,10 @@ jobs:
             grep -viE '^(llama[-_]cpp[-_]python|pywin32|audioop-lts)' "$f" > "/tmp/f_$f" || true
             python -m pip install -r "/tmp/f_$f" || echo "::warning::install from $f failed (advisory)"
           done
-          python -m pip install pytest || echo "::warning::pytest install failed (advisory)"
+          # --asyncio-mode=auto 是 pytest-asyncio 提供的参数：漏装插件时 pytest
+          # 会在参数解析阶段直接退出（exit 4），一条用例都不收集，报错信息也
+          # 完全看不出是"缺插件"，所以两个包必须一起装。
+          python -m pip install pytest pytest-asyncio || echo "::warning::test deps install failed (advisory)"
 
       - name: Unit tests
         run: |
