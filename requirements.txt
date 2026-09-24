@@ -15,7 +15,7 @@ sentence-transformers==3.3.1
 chromadb==0.5.23
 
 # 文档解析
-pypdf==5.0.1
+pypdf==6.19.0
 
 # 联网搜索 / HTTP
 httpx==0.28.1
