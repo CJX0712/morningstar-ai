@@ -1,11 +1,11 @@
 # MorningStar AI — 依赖清单
 # Web 框架
-fastapi==0.115.6
-uvicorn[standard]==0.34.0
-python-multipart==0.0.20
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+python-multipart==0.0.32
 sse-starlette==2.2.1
-pydantic==2.10.4
-pydantic-settings==2.7.1
+pydantic==2.13.5
+pydantic-settings==2.15.0
 
 # 大模型多后端适配（OpenAI 兼容协议）
 openai==1.59.6
@@ -19,7 +19,7 @@ pypdf==5.0.1
 
 # 联网搜索 / HTTP
 httpx==0.28.1
-beautifulsoup4==4.12.3
+beautifulsoup4==4.15.0
 
 # 工具：代码沙箱执行
-numpy==2.2.1
+numpy==2.5.3
