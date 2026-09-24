@@ -48,7 +48,7 @@ jobs:
       - name: Unit tests
         run: |
           if [ -d tests ]; then
-            python -m pytest tests -q
+            python -m pytest tests -q --asyncio-mode=auto
           else
             echo "no tests/ directory - skipping"
           fi
