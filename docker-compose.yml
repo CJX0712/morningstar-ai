@@ -1,10 +1,66 @@
+# MorningStar AI — 端到端容器编排
+# 作者：晨星
+version: "3.9"
+
 services:
-  morningstar:
-    build: .
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: msai-qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    restart: unless-stopped
+
+  # 本地 GGUF 推理（无 GPU 也可跑 7B-Q4）。
+  # 镜像使用 llama.cpp 官方 server；GGUF 模型通过 volume 挂载。
+  llama-cpp:
+    image: ghcr.io/ggml-org/llama.cpp:server
+    container_name: msai-llama
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./models:/models:ro
+    command: >
+      -m /models/${LLM_MODEL_NAME:-qwen2.5-7b-instruct-q4_k_m.gguf}
+      --host 0.0.0.0 --port 8080
+      --ctx-size 4096 --threads ${LLM_THREADS:-4}
+    profiles: ["local-llm"]
+    restart: unless-stopped
+
+  rag-api:
+    build:
+      context: ./services/rag-api
+      dockerfile: Dockerfile
+    container_name: msai-rag-api
     ports:
       - "8000:8000"
-    env_file:
-      - .env
-    volumes:
-      - ./data:/app/data
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+      - EMBED_PROVIDER=${EMBED_PROVIDER:-local}
+      - EMBED_MODEL=${EMBED_MODEL:-BAAI/bge-small-zh-v1.5}
+      - LLM_PROVIDER=${LLM_PROVIDER:-local}
+      - LLM_BASE_URL=${LLM_BASE_URL:-http://llama-cpp:8080/v1}
+      - LLM_MODEL=${LLM_MODEL:-local}
+      - CLOUD_LLM_BASE_URL=${CLOUD_LLM_BASE_URL:-}
+      - CLOUD_LLM_API_KEY=${CLOUD_LLM_API_KEY:-}
+      - CLOUD_LLM_MODEL=${CLOUD_LLM_MODEL:-}
+      - COLLECTION=${COLLECTION:-morningstar}
+    depends_on:
+      - qdrant
     restart: unless-stopped
+
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: msai-web
+    ports:
+      - "5173:80"
+    depends_on:
+      - rag-api
+    restart: unless-stopped
+
+volumes:
+  qdrant_data:

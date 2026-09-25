@@ -1,0 +1,15 @@
+# MorningStar AI — 锁定依赖清单 (rag-api)
+# 生成环境：Python 3.11 / Linux x86_64
+# 说明：同 requirements.txt，附精确版本与来源，便于可复现构建。
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic==2.9.2
+pydantic-settings==2.5.2
+qdrant-client==1.11.3
+httpx==0.27.2
+sentence-transformers==3.1.1
+transformers==4.44.2
+torch==2.4.1
+numpy==1.26.4
+tokenizers==0.19.1
+python-multipart==0.0.12
